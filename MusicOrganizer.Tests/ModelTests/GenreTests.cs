@@ -42,5 +42,49 @@ namespace MusicOrganizer.TestTools
       //Assert
       Assert.AreEqual(1, result);
     }
+
+    [TestMethod]
+    public void GetAll_ReturnsAllGenreObjects_GenreList()
+    {
+      //Arrange
+      Genre newGenre1 = new Genre("string1");
+      Genre newGenre2 = new Genre("string2");
+      
+      List<Genre> newList = new List<Genre> { newGenre1, newGenre2 };
+
+      //Act
+      List<Genre> result = Genre.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+    [TestMethod]
+    public void Find_ReturnsCorrectGenre_Genre()
+    {
+    //Arrange 
+    Genre newGenre1 = new Genre("string1");
+    Genre newGenre2 = new Genre("string2");
+    
+    //Act
+    Genre result = Genre.Find(1);
+
+    //Assert
+    Assert.AreEqual(newGenre1, result);
+    }
+    [TestMethod]
+    public void AddRecord_AssociatesRecordWithGenre_RecordList()
+    {
+      //Arrange
+      Record newRecord = new Record("title", "artist");
+      List<Record> newList = new List<Record> { newRecord };
+      Genre newGenre = new Genre("title");
+      newGenre.AddRecord(newRecord);
+      //Act
+
+      List<Record> result = newGenre.Records;
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
   }
 }
